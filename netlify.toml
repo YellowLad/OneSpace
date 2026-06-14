@@ -1,0 +1,11 @@
+[build]
+  publish = "dist"
+  command = "mkdir -p dist && cp index.html sw.js dist/"
+
+[context.production]
+  command = "mkdir -p dist && cp index.html sw.js dist/"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
