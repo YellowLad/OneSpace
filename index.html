@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneWorld - OneMind AI</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #03050A;
+      color: #EEF2F8;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+
+    .header {
+      margin-bottom: 1.5rem;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #F5B041, #D4AF37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .chat-area {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 1.5rem;
+      padding-right: 0.5rem;
+    }
+
+    .message {
+      margin-bottom: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      max-width: 80%;
+    }
+
+    .message.user {
+      background: linear-gradient(135deg, #F5B041, #D4AF37);
+      color: #03050A;
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .message.assistant {
+      background: #1A1D2B;
+      color: #EEF2F8;
+      margin-right: auto;
+    }
+
+    /* Fix for single-height input */
+    .chat-input-row {
+      display: flex;
+      gap: 0.5rem;
+      height: 56px; /* Fixed height */
+      align-items: center;
+      background: #1A1D2B;
+      border-radius: 40px;
+      padding: 0 1rem;
+    }
+
+    .chat-input-row input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #EEF2F8;
+      font-size: 1rem;
+      height: 100%;
+      padding: 0;
+      outline: none;
+    }
+
+    .chat-input-row input::placeholder {
+      color: #8892A8;
+    }
+
+    .chat-input-row button {
+      background: #F5B041;
+      color: #03050A;
+      border: none;
+      border-radius: 40px;
+      padding: 0.7rem 1.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .chat-input-row button:hover {
+      background: linear-gradient(135deg, #F5B041, #D4AF37);
+      transform: scale(1.05);
+    }
+
+    .chat-input-row button:active {
+      transform: scale(0.95);
+    }
+
+    /* Scrollbar styling */
+    .chat-area::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-area::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .chat-area::-webkit-scrollbar-thumb {
+      background: #8892A8;
+      border-radius: 3px;
+    }
+
+    .chat-area::-webkit-scrollbar-thumb:hover {
+      background: #B0BCC4;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>OneWorld</h1>
+    </div>
+
+    <div class="chat-area" id="chatArea">
+      <div class="message assistant">
+        <p>The Way holds. 🧢💫</p>
+      </div>
+    </div>
+
+    <div class="chat-input-row">
+      <input id="chatInput" placeholder="Message OneMind...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const message = input.value.trim();
+
+      if (!message) return;
+
+      // Add user message
+      const chatArea = document.getElementById('chatArea');
+      const userMsg = document.createElement('div');
+      userMsg.className = 'message user';
+      userMsg.innerHTML = `<p>${escapeHtml(message)}</p>`;
+      chatArea.appendChild(userMsg);
+
+      // Clear input
+      input.value = '';
+
+      // Auto-scroll to bottom
+      chatArea.scrollTop = chatArea.scrollHeight;
+
+      // Simulate response
+      setTimeout(() => {
+        const assistantMsg = document.createElement('div');
+        assistantMsg.className = 'message assistant';
+        assistantMsg.innerHTML = `<p>Processing: "${escapeHtml(message)}"</p>`;
+        chatArea.appendChild(assistantMsg);
+        chatArea.scrollTop = chatArea.scrollHeight;
+      }, 500);
+    }
+
+    // Allow Enter key to send
+    document.getElementById('chatInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+
+    // Escape HTML to prevent XSS
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Service Worker for offline support
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {
+        console.log('Service Worker not available');
+      });
+    }
+  </script>
+</body>
+</html>
