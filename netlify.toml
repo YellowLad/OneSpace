@@ -1,9 +1,9 @@
 [build]
-  publish = "dist"
-  command = "mkdir -p dist && cp index.html sw.js dist/"
+  publish = "."
+  command = "echo 'Static site'"
 
 [context.production]
-  command = "mkdir -p dist && cp index.html sw.js dist/"
+  command = "echo 'Static site'"
 
 [[redirects]]
   from = "/*"
