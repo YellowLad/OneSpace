@@ -1,4 +1,4 @@
-# OneWorld - OneMind AI LLM
+# OneWorld Sovereign - OneMind AI LLM
 
 A production-ready chat interface optimized for offline use and instant deployment.
 
