@@ -49,7 +49,7 @@ OneSpace/
 ├── sw.js               # Service worker and offline navigation fallback
 ├── serve.py            # Local Python development server
 ├── netlify.toml        # Netlify publish directory and redirects
-├── oneMind Code        # Additional project code file
+├── oneMind Code        # Reference notes; not used by the site
 ├── .gitignore          # Git ignore rules
 └── README.md           # This file
 ```
