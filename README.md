@@ -21,7 +21,10 @@ A production-ready chat interface optimized for offline use and instant deployme
 git clone https://github.com/YellowLad/OneSpace.git
 cd OneSpace
 
-# Start a local server (Python 3)
+# Start the local Python server
+python3 serve.py
+
+# Or use Python's built-in server
 python3 -m http.server 8000
 
 # Or use Node.js
@@ -50,6 +53,7 @@ netlify deploy --prod
 OneSpace/
 ├── index.html          # Main chat application
 ├── sw.js               # Service Worker for offline support
+├── serve.py             # Local Python development server
 ├── netlify.toml        # Netlify configuration
 ├── .gitignore          # Git ignore rules
 └── README.md           # This file
