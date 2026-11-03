@@ -330,6 +330,11 @@
   <script>
     // INITIALIZATION
     function init() {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+          .catch(error => console.error('Service worker registration failed:', error));
+      }
+
       if (!localStorage.getItem('onboarded')) {
         document.getElementById('onboardingOverlay').style.display = 'flex';
       } else {
