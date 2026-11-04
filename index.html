@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OneWorld | The Way</title>
+  <title>OneWorld Sovereign | The Way</title>
   <style>
     /* CORE STRUCTURE */
     * {
@@ -286,7 +286,7 @@
 <body>
   <!-- TOP CONSOLE -->
   <div class="top-console">
-    <div class="logo">OneWorld</div>
+    <div class="logo">OneWorld Sovereign</div>
     <div class="user-menu">
       <button class="user-btn" onclick="openUserMenu()">👤</button>
     </div>
@@ -314,7 +314,7 @@
   <!-- ONBOARDING -->
   <div class="onboarding-overlay" id="onboardingOverlay">
     <div class="onboarding-card">
-      <h2>Welcome to OneWorld</h2>
+      <h2>Welcome to OneWorld Sovereign</h2>
       <p>Before we begin, let's review The Way's core principles:</p>
       <ol>
         <li>No gods, no fear — freedom for every Lad</li>
@@ -330,6 +330,11 @@
   <script>
     // INITIALIZATION
     function init() {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+          .catch(error => console.error('Service worker registration failed:', error));
+      }
+
       if (!localStorage.getItem('onboarded')) {
         document.getElementById('onboardingOverlay').style.display = 'flex';
       } else {
@@ -393,7 +398,7 @@
     function openSettings() {
       document.getElementById('mainContent').innerHTML = `
         <h2>⚙️ Settings</h2>
-        <p>Customize your OneWorld experience.</p>
+        <p>Customize your OneWorld Sovereign experience.</p>
         <p style="color: #8892A8; margin-top: 1rem;">Coming soon...</p>
       `;
       document.getElementById('toolsPanel').style.display = 'none';
